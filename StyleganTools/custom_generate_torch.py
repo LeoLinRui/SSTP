@@ -35,6 +35,8 @@ def generate_images(arrs, network_pkl, truncation_psi=1.0,noise_mode='const', ou
     for idx, w in enumerate(arrs):
         z = torch.from_numpy(w).to(device)
         img = G(z, label, truncation_psi=truncation_psi, noise_mode=noise_mode)
+        img = (img.permute(0, 2, 3, 1) * 127.5 + 128).clamp(0, 255).to(torch.uint8)
+        img = img[0].cpu().numpy()
         if save:
             PIL.Image.fromarray(img, 'RGB').save(f'{outdir}/{idx:04d}.png')
         
