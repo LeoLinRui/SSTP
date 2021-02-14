@@ -33,6 +33,11 @@ def generate_transition_latent(arr1, arr2, frames=60):
 
 def transition_latent_from_key(arr): 
     
+    '''
+    inputs should be a list of tuples of (keyframe latent vector, frames)
+    outputs (len(arr) - 1) segments
+    '''
+    
     latent_size = arr[0][0].shape
     
     for element in arr:
@@ -45,13 +50,14 @@ def transition_latent_from_key(arr):
         
         try:
             transition_frame_set = generate_transition_latent(arr[i][0], arr[i+1][0], frames=arr[i][1])
-        except IndexError:
-            transition_frame_set = arr[i][0]
-        
-        try:
-            output = np.vstack((transition_frame_set, output))
+            
+            try:
+                output = np.vstack((output, transition_frame_set))
 
-        except NameError:
-            output = transition_frame_set
+            except NameError:
+                output = transition_frame_set
+
+        except IndexError:
+            pass
             
     return output
