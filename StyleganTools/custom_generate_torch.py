@@ -38,7 +38,7 @@ def generate_images(arrs, network_pkl, truncation_psi=1.0,noise_mode='const', ou
         img = (img.permute(0, 2, 3, 1) * 127.5 + 128).clamp(0, 255).to(torch.uint8)
         img = img[0].cpu().numpy()
         if save:
-            PIL.Image.fromarray(img, 'RGB').save(f'{outdir}/seed{seed:04d}.png')
+            PIL.Image.fromarray(img, 'RGB').save(f'{outdir}/{idx:04d}.png')
         
         print(f'Generated {idx}/{len(arrs)-1}')
         imgs.append(img)
