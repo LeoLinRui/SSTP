@@ -1,27 +1,24 @@
-import cv2.VideoCapture
-import cv2.imwrite
+from cv2 import VideoCapture
+from cv2 import imwrite
 import os
 import matplotlib.pyplot as plt
 
 def extract_frames(video: str, outdir=None):
-  vidcap = cv2.VideoCapture(video)
-  imgs = []
+  
+  if outdir is not None and not os.path.exists(outdir):
+    os.mkdir(outdir)
+    
+  vidcap = VideoCapture(video)
   success = True
-
+  idx = 0
   while success:
     success,img = vidcap.read()
-    imgs.append(img)
-  
-  imgs.pop(-1)
 
-  if outdir is not None:
-    os.mkdir(outdir)
-    num_imgs = len(imgs)
-
-    for idx, img in enumerate(imgs):
+    if (outdir is not None) and (img is not None):
       path = os.path.join(outdir,f"frame{idx:05d}.jpg")
-      cv2.imwrite(path, img)
-      print(f'Saved {path}...Progress: {idx}/{num_imgs}')
+      imwrite(path, img)
+      print(f'Saved {path}')
+      
+    idx += 1
 
   print("Done!")
-  return imgs
