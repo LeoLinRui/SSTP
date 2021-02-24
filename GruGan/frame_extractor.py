@@ -1,4 +1,4 @@
-import cv2.Videocapture
+import cv2.VideoCapture
 import cv2.imwrite
 import os
 import matplotlib.pyplot as plt
