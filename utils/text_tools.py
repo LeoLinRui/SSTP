@@ -32,7 +32,7 @@ def extract_articles(in_path: str, out_path: str, publication="", chunksize=5000
       [chunk[chunk['publication']==publication] for chunk in iter_csv])
 
   df.drop("publication", axis="columns", inplace=True) # Remove publication column
-  df.to_csv(out_path) # Save as .csv
+  df.to_csv(out_path, header=False, index=False) # Save as .csv
   return df
 
 # I suppose the module name is a misnomer since it only contains one method
