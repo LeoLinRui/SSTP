@@ -40,3 +40,17 @@ def mp4_from_folder(imgs_path: str, mp4_path='video.mp4', fps=30):
         print(filename)
 
     out.release()
+    
+#----------------------------------------------------------------------------
+
+def numpy2video(arr: np.ndarray, fps=30, mp4_path="np_out.mp4"):
+  assert mp4_path.endswith('.mp4')
+  
+  frameSize= (arr[0].shape[0], arr[0].shape[1])
+  out = VideoWriter(mp4_path,VideoWriter_fourcc(*'MP4V'), fps, frameSize)
+
+  for img in arr:
+    img = img.astype("uint8")
+    out.write(img)
+
+  out.release()
