@@ -2,7 +2,6 @@
 
 ## Previous Work
 ### Summary
-### Change Log
 ### Samples
 ### Misc
 
