@@ -3,6 +3,7 @@
 ## Previous Work
 ### Summary
 ### Samples
+![fakes000320](https://user-images.githubusercontent.com/44302577/109961804-6499e000-7d25-11eb-94fb-e51e79bcc87e.png)
 ### Misc
 
 ## Week 1
