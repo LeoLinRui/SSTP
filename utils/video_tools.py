@@ -4,6 +4,7 @@ import PIL.Image
 from PIL import Image
 from cv2 import VideoWriter, VideoWriter_fourcc, imread
 
+from bumpy import multiply
 #----------------------------------------------------------------------------
 def gif_from_folder(imgs_path: str, gif_path='gif/gif.gif', fps=30):
     assert imgs_path.endswith('/*.png')
@@ -43,14 +44,19 @@ def mp4_from_folder(imgs_path: str, mp4_path='video.mp4', fps=30):
     
 #----------------------------------------------------------------------------
 
-def numpy2video(arr: np.ndarray, fps=30, mp4_path="np_out.mp4"):
+def numpy2video(arr: np.ndarray, mp4_path="np_out.mp4", fps=30, scale=True):
   assert mp4_path.endswith('.mp4')
   
   frameSize= (arr[0].shape[0], arr[0].shape[1])
   out = VideoWriter(mp4_path,VideoWriter_fourcc(*'MP4V'), fps, frameSize)
-
-  for img in arr:
-    img = img.astype("uint8")
-    out.write(img)
+    
+  if scale:
+    for img in arr:
+      img = img.astype("uint8")
+      out.write(multiply(img, 255))
+  else:
+    for img in arr:
+      img = img.astype("uint8")
+      out.write(img)
 
   out.release()
