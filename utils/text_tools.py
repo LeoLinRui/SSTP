@@ -45,7 +45,7 @@ def extract_articles(
 
   # Parses the csv in chunks to limit memory usage
   iter_csv = pd.read_csv(
-    "drive/MyDrive/SSTP/data/news.csv", usecols=["publication", "article"],
+    in_path, usecols=["publication", "article"],
      iterator=True, chunksize=chunksize)
   df = pd.concat(
       [chunk[chunk['publication']==publication] for chunk in iter_csv])
