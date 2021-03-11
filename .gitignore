@@ -133,3 +133,9 @@ dmypy.json
 .idea/modules.xml
 .idea/SSTP.iml
 .idea/vcs.xml
+
+GruGan/test_frames
+*.mp4
+*.tar
+utils/774M/model.ckpt.data-00000-of-00001
+GruGan/network-snapshot-000720.pkl
