@@ -51,3 +51,20 @@ https://twitter-clone-sstp.ue.r.appspot.com/
 
 ### Misc
 We met with Mr. Oxton's son, Timothy Oxton, who is a photographer currently working on his independent game. We had a 90-minute discussion about new digital technologies in art-making and the various aspects of designing a virtual experience for the viewer.
+
+## Week 2
+Apr. 12 --> Apr. 19
+
+### Summary
+#### Minh
+
+#### Leo
+
+
+### Change Log
+
+
+### Samples
+https://twitter-clone-sstp.ue.r.appspot.com/
+
+### Misc
