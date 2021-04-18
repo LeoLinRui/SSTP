@@ -67,12 +67,7 @@ Apr. 12 --> Apr. 19
 #### Leo
 This week my work focused on figuring out ways to achieve image-generation for tweets based on the content of the tweets. First, I conducted an analysis on the vocabulary on the generated tweets, from which we determined that there is actually less variation in the nouns used in the generated tweets then we had previously imagined. I then decided to train an image generation model on Trump's photos, as it covers the most tweets from the Right Troll GPT model. I used open datasets as well as private ones, which I used custom scrapers and wrote processing tools for. We were able to construct a dataset consisting of 30,000 Trump photos. I have obtained preliminary results on the generation of Trump's photo on StyleGAN. More fine-tuning is to be done. 
 
-### Change Log
-
-
 ### Samples
 https://twitter-clone-sstp.ue.r.appspot.com/
 
-![fakes000120](https://user-images.githubusercontent.com/44302577/115158697-19b00e00-a0c2-11eb-8569-a27624468c71.jpg)
-
-### Misc
+![WeChat Image_20210419035012](https://user-images.githubusercontent.com/44302577/115158761-64ca2100-a0c2-11eb-89c9-54a16992da2e.png)
