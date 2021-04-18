@@ -61,7 +61,6 @@ Apr. 12 --> Apr. 19
 - Generated 50000 Tweets.
 - Wrote pre-processing script for Leo's analysis.
 - Implemented scraper to scrape first 100 pages (6000 images) of a Getty Images search.
-
 - Implemented Tweet loading queue. Bottoming out on a scroll while not loading any Tweets should (emphasis on "should") not happen anymore.
 - Made script to automatically compile and deploy to GCP App Engine.
 
