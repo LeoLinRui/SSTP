@@ -146,3 +146,4 @@ GruGan/network-snapshot-000720.pkl
 *.bin
 
 Vformer\model_checkpoints\**
+*.json
