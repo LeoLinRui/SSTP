@@ -81,6 +81,7 @@ Twitter clone backend:
 - Generated ~60000 Tweets under multiple categories (HashtagGamer, Newsfeed, LeftTroll) of the Russian interference Twitter campaign and added to database.
 - Optimized API requests system. Tweet-loading latency should be 3x faster (and quite a bit cheaper). 
   - No magic here. I just learned to include data from multiple models in one response.
+
 Twitter clone frontend:
 - Support for explanations. User can click on the username of a Tweet for the origin story of a the Tweet.
 - Some UI/UX improvements including but not limited to: button-clicking sound effects, text scrambling for unused sidebar options, and flipping animation for explanation.
@@ -88,6 +89,7 @@ Twitter clone frontend:
   -   Programmer milestone: Used Regex! (to detect links)
   -   This took too long; React really doesn't like passing HTML through a variable in JSX
   -   ![danger](https://user-images.githubusercontent.com/64875104/115997062-83cf2400-a596-11eb-84ac-4578e572beb3.png)
+
 Data stuff:
 - Finally learned to make proper HTTP requests from Python.
 - Made script to download and stream The Internet Archive's Twitter corpus to Google Drive for processing (and hopefully generation).
