@@ -71,3 +71,15 @@ This week my work focused on figuring out ways to achieve image-generation for t
 https://twitter-clone-sstp.ue.r.appspot.com/
 
 ![WeChat Image_20210419035012](https://user-images.githubusercontent.com/44302577/115158761-64ca2100-a0c2-11eb-89c9-54a16992da2e.png)
+
+## Week 2
+Apr. 19 --> Apr. 26
+
+### Summary
+#### Minh
+
+
+#### Leo
+This week's work includes 3 parts: 1. Fixing StyleGAN, 2. finding and pre-processing generic tweet data, and 3. finding a meme dataaset. The copy of StyleGAN on my computer is suddenly unable to build a cpp plug-in essential to the model's function. I've spent hours re-cloning my repo, updating CUDA and cuda toolkit, upgrading pytorch, and trying various methods found online, all without much success. I'll be spending more time on getting it to work again in the next week. After a long search, I was able to find a large, generic tweet dataset that includes the original text of the tweets (thus bypassing the strict Twitter API limit.) There are approximately 1TB of json files containing tweets from 2018 to 2021. After downloading some files and doing some analysis, we've found that about 15% of these tweets are high-quality, usable data. I wrote the pre-processing pipeline, which filters out tweets in languages other than English, retweets. It also removes emojies from tweets and can take out tweets that are too short in order to improve training efficiency. The [code](https://github.com/LeoLinRui/SSTP/blob/main/utils/Twitter_Js_Load.py) utilizes multi-processing to speed up the pre-processing of the large dataset we have, which is pretty cool. I've also worked on looking for a high-quality and quantity meme dataset. I've found one containing over 50k links to images and have written a script to retrieve them. However, there seems to be some errors regarding the image files these urls points to. I'm currently working on toubleshotting these issues.
+
+### Samples
