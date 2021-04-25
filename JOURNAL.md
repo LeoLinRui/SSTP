@@ -59,7 +59,7 @@ Apr. 12 --> Apr. 19
 #### Minh
 - Optimized generation resulting in 10x generation speed (as a result of previous terribleness, not new programming magic).
 - Generated 50000 Tweets.
-- Wrote pre-processing script for Leo's analysis.
+- Wrote pre-processing script for Leo's analysis, including a machine-learning algorithm to detect text encoding.
 - Implemented scraper to scrape first 100 pages (6000 images) of a Getty Images search.
 - Implemented Tweet loading queue. Bottoming out on a scroll while not loading any Tweets should (emphasis on "should") not happen anymore.
 - Made script to automatically compile and deploy to GCP App Engine.
@@ -79,7 +79,8 @@ Apr. 19 --> Apr. 26
 #### Minh
 Twitter clone backend:
 - Generated ~60000 Tweets under multiple categories (HashtagGamer, Newsfeed, LeftTroll) of the Russian interference Twitter campaign and added to database.
-- Optimized API requests system. Tweet-loading latency should be 3x faster (and quite a bit cheaper). (No magic here. I just learned to include data from multiple models in one response.)
+- Optimized API requests system. Tweet-loading latency should be 3x faster (and quite a bit cheaper). 
+  - No magic here. I just learned to include data from multiple models in one response.
 Twitter clone frontend:
 - Support for explanations. User can click on the username of a Tweet for the origin story of a the Tweet.
 - Some UI/UX improvements including but not limited to: button-clicking sound effects, text scrambling for unused sidebar options, and flipping animation for explanation.
@@ -87,7 +88,11 @@ Twitter clone frontend:
   -   Programmer milestone: Used Regex! (to detect links)
   -   This took too long; React really doesn't like passing HTML through a variable in JSX
   -   ![danger](https://user-images.githubusercontent.com/64875104/115997062-83cf2400-a596-11eb-84ac-4578e572beb3.png)
+Data stuff:
+- Finally learned to make proper HTTP requests from Python.
+- Made script to download and stream The Internet Archive's Twitter corpus to Google Drive for processing (and hopefully generation).
 
+made a nice espresso. not related. just wanted to share :)
 
 
 #### Leo
