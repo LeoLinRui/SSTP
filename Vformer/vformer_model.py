@@ -27,87 +27,11 @@ import torchvision
 import warnings
 
 from ModelZoo import TemporalDiscriminator, StyleGanGenerator, StyleGanDiscriminator
+import transformers
 
 BATCH_SIZE = 24
 
 
-class CombinedEmbedding(nn.Module):
-    def __init__(self, embedding_dim=512, vocab_size=16384, reformer_layer=12, positional_encoding=True, fmap_encoding=True):
-        super(CombinedEmbedding, self).__init__()
-
-        self.embedding_dim = embedding_dim
-        self.vocab_size = vocab_size
-        self.reformer_layer = reformer_layer
-        self.positional_encoding = positional_encoding
-        self.fmap_encoding = fmap_encoding
-
-        self.token_embedder = nn.Linear(in_features=self.vocab_size, out_features=self.embedding_dim, bias=False)
-        self.positional_embedder = nn.Embedding(num_embeddings=256, embedding_dim=self.embedding_dim)
-        self.fmap_embedder = nn.Embedding(num_embeddings=256, embedding_dim=self.embedding_dim)
-
-        self.device = torch.device('cpu')
-
-
-    def forward(self, x, position_idx=None):
-        self.position_idx = position_idx
-
-        assert torch.max(x) == 1 and torch.min(x) == 0, "input has to be one-hot encoded. Got max {}, min {}".format(torch.max(x), torch.min(x))
-        x.to(self.device)
-
-        # if input is just one image, shape == (b, 1, 256, vocab_size)
-        if position_idx is not None :
-            if len(x.shape) is 3:
-                pass
-            elif len(x.shape) is 4 and x.shape[1] is 1:
-                x = x.squeeze(1)
-            else:
-                raise ValueError('input shape {} is incorrect for position_idx not None'.format(x.shape))
-                    
-            out = torch.zeros(x.shape[0], x.shape[1], x.shape[2], self.embedding_dim, device=self.device)
-            for i, s in enumerate(x): #traverse sequences in a batch
-                for j, m in enumerate(s): #traverse feature maps in a frame
-                    out[i][j] = self.token_embedder(m)
-                    if self.fmap_encoding:
-                            out[i][j] += self.fmap_embedder(torch.tensor(position_idx, device=self.device).long())
-
-        # if input is a full sequence, shape == (b, 256, 256, vocab_size)
-        else:
-            if self.positional_encoding:
-                assert len(x.shape) == 4, 'no position_idx given for 3 dimension input'
-
-            out = torch.zeros(x.shape[0], x.shape[1], x.shape[2], self.embedding_dim, device=self.device)
-            for i, s in enumerate(x): #traverse sequences in a batch
-                for j, f in enumerate(s): #traverse frames in a sequence
-                    for k, m in enumerate(f): #traverse feature maps in a frame
-                        out[i][j][k] = self.token_embedder(m) 
-                        if self.positional_encoding:
-                            out[i][j][k] += self.positional_embedder(torch.tensor(j, device=self.device).long()) 
-                        if self.fmap_encoding:
-                            out[i][j][k] += self.fmap_embedder(torch.tensor(k, device=self.device).long())
-
-        return out
-    
-    
-    def get_embedding_matrix(self):
-        return list(self.token_embedder.parameters())[0]
-
-
-    def to(self, device):
-        assert isinstance(device, torch.device)
-        self.device = device
-
-        self.token_embedder = nn.Linear(in_features=self.vocab_size, out_features=self.embedding_dim, bias=False).to(self.device)
-        self.positional_embedder = nn.Embedding(num_embeddings=256, embedding_dim=self.embedding_dim).to(self.device)
-        self.fmap_embedder = nn.Embedding(num_embeddings=256, embedding_dim=self.embedding_dim, ).to(self.device)
-        
-        return self
-
-
-    def cuda(self):
-        self.to(torch.device('cuda'))
-        return self
-    
-    
 class Conv(nn.Module):
     def __init__(self, dic_size=20000, output_len=256):
             super(Conv, self).__init__()
@@ -172,6 +96,87 @@ class Conv(nn.Module):
         
         else:
             raise ValueError('input shape {} is incorrect'.format(x.shape))
+
+
+class CombinedEmbedding(nn.Module):
+    def __init__(self, embedding_dim=512, vocab_size=16384, reformer_layer=12, positional_encoding=True, fmap_encoding=True, device='cpu'):
+        super(CombinedEmbedding, self).__init__()
+
+        self.embedding_dim = embedding_dim
+        self.vocab_size = vocab_size
+        self.reformer_layer = reformer_layer
+        self.positional_encoding = positional_encoding
+        self.fmap_encoding = fmap_encoding
+
+        self.token_embedder = nn.Linear(in_features=self.vocab_size, out_features=self.embedding_dim, bias=False)
+        self.positional_embedder = nn.Embedding(num_embeddings=256, embedding_dim=self.embedding_dim)
+        self.fmap_embedder = nn.Embedding(num_embeddings=256, embedding_dim=self.embedding_dim)
+
+        self.device = torch.device(device)
+
+    #@autocast
+    def forward(self, x, position_idx=None):
+        self.position_idx = position_idx
+
+        # TODO fix the device logic for distributed
+        # TODO assert torch.max(x) == 1 and torch.min(x) == 0, "input has to be one-hot encoded. Got max {}, min {}".format(torch.max(x), torch.min(x))
+        x.to(self.device)
+
+        # TODO fix the case determination logic
+        # if input is just one image, shape == (b, 1, 256, vocab_size)
+        if position_idx is not None or self.positional_encoding is False:
+            if len(x.shape) is 3:
+                pass
+            elif len(x.shape) is 4 and x.shape[1] is 1:
+                x = x.squeeze(1)
+            else:
+                raise ValueError('input shape {} is incorrect for position_idx not None'.format(x.shape))
+    
+            out = torch.zeros(x.shape[0], x.shape[1], self.embedding_dim, device=self.device)
+            for i, s in enumerate(x): #traverse sequences in a batch
+                for j, m in enumerate(s): #traverse feature maps in a frame
+                    out[i][j] = self.token_embedder(m)
+                    if self.fmap_encoding:
+                            out[i][j] += self.fmap_embedder(torch.tensor(j, device=self.device).long())
+
+                            # TODO add positional encoding
+
+        # if input is a full sequence, shape == (b, 256, 256, vocab_size)
+        else:
+            if self.positional_encoding:
+                assert len(x.shape) == 4, 'no position_idx given for 3 dimension input'
+
+            out = torch.zeros(x.shape[0], x.shape[1], x.shape[2], self.embedding_dim, device=self.device)
+            for i, s in enumerate(x): #traverse sequences in a batch
+                for j, f in enumerate(s): #traverse frames in a sequence
+                    for k, m in enumerate(f): #traverse feature maps in a frame
+                        out[i][j][k] = self.token_embedder(m) 
+                        if self.positional_encoding:
+                            out[i][j][k] += self.positional_embedder(torch.tensor(j, device=self.device).long()) 
+                        if self.fmap_encoding:
+                            out[i][j][k] += self.fmap_embedder(torch.tensor(k, device=self.device).long())
+
+        return out
+    
+    
+    def get_embedding_matrix(self):
+        return list(self.token_embedder.parameters())[0]
+
+
+    def to(self, device):
+        assert isinstance(device, torch.device)
+        self.device = device
+
+        self.token_embedder = nn.Linear(in_features=self.vocab_size, out_features=self.embedding_dim, bias=False).to(self.device)
+        self.positional_embedder = nn.Embedding(num_embeddings=256, embedding_dim=self.embedding_dim).to(self.device)
+        self.fmap_embedder = nn.Embedding(num_embeddings=256, embedding_dim=self.embedding_dim, ).to(self.device)
+        
+        return self
+
+
+    def cuda(self):
+        self.to(torch.device('cuda'))
+        return self
                 
             
 class DeConv(nn.Module):
@@ -215,18 +220,18 @@ class Reformer(nn.Module):
         self.vocab_size = vocab_size
         
         ## load the model from huggingface, slice off the embedding, input, and output layers
-        self.model = transformers.ReformerModelWithLMHead.from_pretrained("google/reformer-enwik8")
-        self.model = list(self.model.children())
+        self.original = transformers.ReformerModelWithLMHead.from_pretrained("google/reformer-enwik8")
+        self.model = list(self.original.children())
         self.model = list(self.model[0].children())
         self.model = self.model[1]
+        self.model.train()
         
         self.output = nn.Linear(2048, self.vocab_size, bias=True)
 
         
     #@autocast()
     def forward(self, x):
-        
-        x = self.model(x)
+        x = self.model.base_model(x)
         x = self.output(x)
         x = F.softmax(x)
 
