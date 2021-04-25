@@ -70,13 +70,24 @@ This week my work focused on figuring out ways to achieve image-generation for t
 ### Samples
 https://twitter-clone-sstp.ue.r.appspot.com/
 
-![WeChat Image_20210419035012](https://user-images.githubusercontent.com/44302577/115158761-64ca2100-a0c2-11eb-89c9-54a16992da2e.png)
+![image](https://user-images.githubusercontent.com/44302577/115158761-64ca2100-a0c2-11eb-89c9-54a16992da2e.png)
 
 ## Week 2
 Apr. 19 --> Apr. 26
 
 ### Summary
 #### Minh
+Twitter clone backend:
+- Generated ~60000 Tweets under multiple categories (HashtagGamer, Newsfeed, LeftTroll) of the Russian interference Twitter campaign and added to database.
+- Optimized API requests system. Tweet-loading latency should be 3x faster (and quite a bit cheaper). (No magic here. I just learned to include data from multiple models in one response.)
+Twitter clone frontend:
+- Support for explanations. User can click on the username of a Tweet for the origin story of a the Tweet.
+- Some UI/UX improvements including but not limited to: button-clicking sound effects, text scrambling for unused sidebar options, and flipping animation for explanation.
+- Support for clickable hyperlinks in explanation. 
+  -   Programmer milestone: Used Regex! (to detect links)
+  -   This took too long; React really doesn't like passing HTML through a variable in JSX
+  -   ![danger](https://user-images.githubusercontent.com/64875104/115997062-83cf2400-a596-11eb-84ac-4578e572beb3.png)
+
 
 
 #### Leo
