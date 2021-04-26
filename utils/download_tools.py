@@ -19,6 +19,7 @@ def download_files(downloads, location):
     for key in downloads.keys():
         url = downloads[key]
         print(f"Downloading {key} from {url}")
+        
 
         response = requests.get(url, stream=True)
         total_size_in_MiB= int(response.headers.get('content-length'))/8388608
@@ -32,3 +33,22 @@ def download_files(downloads, location):
                             ):
                 file.write(data)
 
+
+import csv
+import os
+import string
+import urllib.request as req
+
+csv_dir = r"C:\Users\Leo's PC\Desktop\JS_Folder\memegenerator.csv"
+save_dir = r"C:\Users\Leo's PC\Desktop\JS_Folder\memes"
+dic = {}
+
+with open(csv_dir, 'r', encoding='utf-8') as f:
+    reader = csv.reader(f)
+    for i, row in enumerate(reader):
+        if i == 0: continue
+        dic[row[2]+" - "+row[6].translate(str.maketrans('', '', string.punctuation))] = row[1].split(sep='*')[1][1:]
+
+print(len(dic), "memes collected\ndownloading...")
+for filename, url in tqdm(dic.items()):
+    req.urlretrieve(url, os.path.join(save_dir, filename + ".jpg"))

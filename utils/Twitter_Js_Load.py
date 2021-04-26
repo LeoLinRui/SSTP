@@ -73,7 +73,7 @@ def process(filedir:str):
                 tweet = tweet["text"]
 
                 try:
-                    if checkEng(tweet) and checkRT(tweet) and checkLen(tweet):
+                    if checkLen(tweet) and checkRT(tweet) and checkEng(tweet):
                         if REMOVE_EMOJI:
                             tweet = removeEmojis(tweet)
 
@@ -112,4 +112,4 @@ if __name__ == '__main__':
  
     with open(os.path.join(save_dir, str(len(tweet_list)) + "tweets.csv"), 'w', encoding='utf-8') as f:
         writer = csv.writer(f, delimiter=',')
-        writer.writerows(tweet_list)
+        writer.writerow(tweet_list)
