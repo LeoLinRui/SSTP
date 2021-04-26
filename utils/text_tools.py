@@ -1,7 +1,13 @@
 import os
+import json
+import bz2
+import csv
 import glob
 import pandas as pd
 from math import ceil
+from random import randint, choices
+import string
+from p_tqdm import p_map
 
 def append_all_txts(in_path, out_path):
   """
@@ -84,3 +90,15 @@ def split_csv(in_path: str, out_path="", no_of_files=5):
     element.to_csv(f"{out_path}_{idx:03}.csv", header=False, index=False)
 
   return all
+
+def create_test_csv(fp: str, length = 100):
+
+  data = []
+  for idx in range(length):
+    entry_length = randint(0,200)
+    rand_text = ''.join(choices(string.ascii_uppercase + string.digits, k=entry_length))
+    entry = f"{idx:04d}, {(entry_length+39):03d} characters (including this): " + rand_text
+    data.append(entry)
+
+  pd.DataFrame(data).to_csv(fp, header=False, index=False)
+  
