@@ -6,6 +6,7 @@ import csv
 
 from langdetect import detect
 from p_tqdm import p_map
+import multiprocessing
 
 
 ENGLISH_ONLY = True
@@ -101,7 +102,7 @@ if __name__ == '__main__':
     print(len(dir_list), "files found")
 
 
-    tweet_list = p_map(process, dir_list)
+    tweet_list = p_map(process, dir_list, num_cpus=multiprocessing.cpu_count() - 1) # Leave 1 thread for other processes
     tweet_list = sum(tweet_list, [])
     
 
