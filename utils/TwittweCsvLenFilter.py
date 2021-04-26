@@ -27,11 +27,11 @@ def process(tweets:list):
 
 if __name__ == '__main__':
 
-    #work_dir = input("work directory (file):")
-    #save_dir = input("save directory (not file):")
+    work_dir = input("work directory (file):")
+    save_dir = input("save directory (not file):")
 
-    work_dir = r"C:\Users\Leo's PC\Desktop\JS_Folder\28746tweets.csv"
-    save_dir = r"C:\Users\Leo's PC\Desktop\JS_Folder"
+    #work_dir = r"C:\Users\Leo's PC\Desktop\JS_Folder\28746tweets.csv"
+    #save_dir = r"C:\Users\Leo's PC\Desktop\JS_Folder"
 
     with open(work_dir, encoding='utf-8') as f:
         reader = csv.reader(f)
