@@ -88,7 +88,7 @@ def process(filedir:str):
 
 if __name__ == '__main__':
 
-    work_dir = input("work directory:")
+    work_dir = input("work directory (source)")
     save_dir = input("save directory (not file):")
 
     dir_list = []
