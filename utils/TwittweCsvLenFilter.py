@@ -6,46 +6,44 @@ import numpy as np
 from langdetect import detect
 from p_tqdm import p_map
 import tqdm
+import multiprocessing
 
 
-LEN_LIMIT = 100  # This is a lower limit
+def filter_by_length(work_dir:str, save_dir:str, limit=50):
 
+    def chunks(lst, n):
+        """Yield successive n-sized chunks from lst."""
+        for i in range(0, len(lst), n):
+            yield lst[i:i + n]
 
-def chunks(lst, n):
-    """Yield successive n-sized chunks from lst."""
-    for i in range(0, len(lst), n):
-        yield lst[i:i + n]
-
-
-def process(tweets:list):
-    content = []
-    for tweet in tqdm.tqdm(tweets): # remove tqdm if doing multiprocessing
-        if len(tweet) >= LEN_LIMIT:
-            content.append(tweet)
-    return content
-
-
-if __name__ == '__main__':
-
-    work_dir = input("work directory (file):")
-    save_dir = input("save directory (not file):")
-
-    #work_dir = r"C:\Users\Leo's PC\Desktop\JS_Folder\28746tweets.csv"
-    #save_dir = r"C:\Users\Leo's PC\Desktop\JS_Folder"
+    def process(tweets:list):
+        content = []
+        for tweet in tweets: # remove tqdm if doing multiprocessing
+            if len(tweet) >= limit:
+                content.append(tweet)
+        return content
 
     with open(work_dir, encoding='utf-8') as f:
         reader = csv.reader(f)
         tweets = list(reader)[0]
 
-    '''
-    use this for multiprocessing
-    tweets = list(chunks(tweets, int(len(tweets)/10000)))
-    output = p_map(process, tweets, num_cpus=multiprocessing.cpu_count() - 1)
+    
+    # use this for multiprocessing
+    tweets = list(chunks(tweets, int(len(tweets)/100)))
+    output = p_map(process, tweets, num_cpus=multiprocessing.cpu_count(), desc="Filtering")
+    print("Recombining tweets list")
     output = sum(output, [])
-    '''
+    
 
-    output = process(tweets)
+    # output = process(tweets)
  
-    with open(os.path.join(save_dir, str(len(output)) + "tweets_filtered.csv"), 'w', encoding='utf-8') as f:
+    with open(os.path.join(save_dir), 'w', encoding='utf-8') as f:
         writer = csv.writer(f, delimiter=',')
-        writer.writerow(output)
+        for tweet in tqdm.tqdm(output, desc="Saving csv", unit="rows"):
+            writer.writerow([tweet])
+
+if __name__ == "__main__":
+    filter_by_length(
+        work_dir=input("Path to source .csv:"),
+        save_dir=input("Path to destination .csv:"), 
+        limit=input("Length (lower) limit: "))
