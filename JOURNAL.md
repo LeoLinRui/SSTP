@@ -105,3 +105,10 @@ The copy of StyleGAN on my computer is suddenly unable to build a cpp plug-in es
 After a long search, I was able to find a large, generic tweet dataset that includes the original text of the tweets (thus bypassing the strict Twitter API limit.) There are approximately 1TB of json files containing tweets from 2018 to 2021. After downloading some files and doing some analysis, we found that about 15% of these tweets are high-quality, usable data. I wrote the pre-processing pipeline, which filters out tweets in languages other than English, retweets. It also removes emojies from tweets and can take out tweets that are too short in order to improve training efficiency. The [code](https://github.com/LeoLinRui/SSTP/blob/main/utils/Twitter_Js_Load.py) utilizes multi-processing to speed up the pre-processing of the large dataset we have, which is pretty cool. 
 
 I've also worked on looking for a high-quality and quantity meme dataset. I've found one containing over 50k links to images and have written a script to retrieve them. However, there seems to be some errors regarding the image files these urls points to. I'm currently working on toubleshotting these issues.
+
+## Week 3
+Apr. 26 --> May 3
+
+### Summary
+#### Minh
+#### Leo
