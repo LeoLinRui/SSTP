@@ -111,4 +111,14 @@ Apr. 26 --> May 3
 
 ### Summary
 #### Minh
+- Work around our various mistakes in saving the processed generic tweets.
+  -   Mistakes include but are not limited to: putting data in a row instead of column, appending a field separator after *every letter*, praying to false idols.
+  -   Look at this terribleness ![terribleness](https://user-images.githubusercontent.com/64875104/116816698-e0db5480-ab17-11eb-859b-c7fb85ba9e30.png)
+  -   Fixes would've been much quicker if I didn't try to edit gigabytes of data off of a cloud drive. Curse my data-loss paranoia (and my ISP).
+- Trained NLP model on three batches of data. ("Batch" does have a technical meaning which I am electing to ignore).
+  -   Actually not trivial because it keeps breaking thanks to our great job with saving/writing the data.
+- Learned multithreading for data processing in Python using multiprocessing and p_tqdm libraries
+  -   Also learned (the hard way) to not use it unnecessarily. Python does not love multithreading.
+
+
 #### Leo
