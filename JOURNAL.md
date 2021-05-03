@@ -122,3 +122,7 @@ Apr. 26 --> May 3
 
 
 #### Leo
+The meme dataset urls seems to be broken still and I couldn't figure out a way to solve that issue. I'm working on fining other good ones.
+Most of my time this week is spent on dealing with generic tweets. I had to babysit the download for a decent while before I can do the processing. As Minh has mentioned in his journal entry, the processing keeps giving weird errors that we had to fix. I added a few new pieces to the pre-processing so we can better filter out short tweets and tweets that did not finish in one post. After all that debugging we are training the generic tweets generator now, which will make up the bulk of our final product. Below are some early examples of generic tweets we have generated.
+![WeChat Image_20210503190939](https://user-images.githubusercontent.com/44302577/116869367-32ccc900-ac43-11eb-8da2-fa916169f40b.png)
+After a few more attempts of fixing the StyleGan clone, I've given up. I got Colab Pro. I'm moving all the training data onto Google drive.
