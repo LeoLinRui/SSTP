@@ -106,7 +106,7 @@ After a long search, I was able to find a large, generic tweet dataset that incl
 
 I've also worked on looking for a high-quality and quantity meme dataset. I've found one containing over 50k links to images and have written a script to retrieve them. However, there seems to be some errors regarding the image files these urls points to. I'm currently working on toubleshotting these issues.
 
-## Week 3
+## Week 4
 Apr. 26 --> May 3
 
 ### Summary
