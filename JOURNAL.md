@@ -126,3 +126,19 @@ The meme dataset urls seems to be broken still and I couldn't figure out a way t
 Most of my time this week is spent on dealing with generic tweets. I had to babysit the download for a decent while before I can do the processing. As Minh has mentioned in his journal entry, the processing keeps giving weird errors that we had to fix. I added a few new pieces to the pre-processing so we can better filter out short tweets and tweets that did not finish in one post. After all that debugging we are training the generic tweets generator now, which will make up the bulk of our final product. Below are some early examples of generic tweets we have generated.
 ![WeChat Image_20210503190939](https://user-images.githubusercontent.com/44302577/116869367-32ccc900-ac43-11eb-8da2-fa916169f40b.png)
 After a few more attempts of fixing the StyleGan clone, I've given up. I got Colab Pro. I'm moving all the training data onto Google drive.
+
+## Week 5
+May. 4 --> May. 11
+
+### Summary
+#### Minh
+
+
+#### Leo
+- Set up the training envrinments and the pre-processing pipeline on Colab for training the Trump Images with StyleGAN Tensorflow. Completed ~60 hours of training, achieving a satisfacoty result that can be used. Sample below: ![image](https://user-images.githubusercontent.com/44302577/117583609-a6d30980-b13a-11eb-81e0-951b7342fc57.png)
+- Completed a few tests with Attention GAN for text-to-image generation, which will be used to generated images for a certain portion of the tweets in our project. Explored the possibility of using it on RunwayML browser app and desktop app, also looking into the possibility of utilizing the original repo.
+- Designed the logo for the project ("Barker") ![image](https://user-images.githubusercontent.com/44302577/117583620-bd796080-b13a-11eb-8560-000e26ba63e4.png)
+- Designed the webpage for the generated news articles. (includes learning Adobe Dreamweaver, a little bit of HTML and CSS.) Sample: ![image](https://user-images.githubusercontent.com/44302577/117583790-bd2d9500-b13b-11eb-86e7-1a73b9a5cb21.png)
+- Generated, with StyleGAN2 on FFHQ, 1000 faces for use as profile photos of the user of the tweet. Sample below:![image](https://user-images.githubusercontent.com/44302577/117583693-337dc780-b13b-11eb-939b-1f3afd3fb0b7.png)
+- An extensive meeting with Minh (3+ hours) to recap the status of all current products, determine the final layout and graphic design details of the site, disucuss the production setup of image databases, and decide the design requirements for the various news article "card" sections on the site, which I will be designing next week.
+- Downloaded and processed some more generic tweets data for final fine-tuning of the generic tweet model.
