@@ -132,10 +132,31 @@ May. 4 --> May. 11
 
 ### Summary
 #### Minh
+Twitter clone app:
+- Set up system and pipeline to support full-length generated news articles.
+  -   Added new table in database for articles, which supports tweet-article pairing.
+  -   Added new API endpoint to retrieve aforementioned news articles.
+  -   Added frontend routing system to move from the tweet feed to individual news articles.
+  -   Delegated aesthetic design of the news-site to Leo. We can now share in the suffering of CSS.
+-   Removed (now-useless) API endpoints.
+  -   Thanks to optimizations in the requesting system, what used to need four separate API calls only requires one.
+  -   So much work... down the drain. It's a learning experience... I suppose.
+-   Researched methods of hosting and streaming videos on the web.
+  -   Apparently throwing around gigabytes of data all over the world on demand is complicated and expensive.
+  -   YouTube will have to do.
+
+Data/ML stuff:
+- Retrained GenericTweet model after it got corrupted.
+  - Google probably isn't happy that I'm using so much GPU time.
+- Aquired and processed dataset of CCTV videos.
+- Used YOLOv5 (You Only Look Once version 5) to create computer-vision-generated bounding boxes.
+  - A message on both the ability of AI and the degree to which we are being watched.
+https://user-images.githubusercontent.com/64875104/117624577-e9401a80-b129-11eb-89ba-d6a82e26e86f.mp4
+
 
 
 #### Leo
-- Set up the training envrinments and the pre-processing pipeline on Colab for training the Trump Images with StyleGAN Tensorflow. Completed ~60 hours of training and tweaking hyperparameters, achieving a satisfacoty result that can be used in production. Sample below: ![image](https://user-images.githubusercontent.com/44302577/117583609-a6d30980-b13a-11eb-81e0-951b7342fc57.png)
+- Set up the training environments and the pre-processing pipeline on Colab for training the Trump Images with StyleGAN Tensorflow. Completed ~60 hours of training and tweaking hyperparameters, achieving a satisfacoty result that can be used in production. Sample below: ![image](https://user-images.githubusercontent.com/44302577/117583609-a6d30980-b13a-11eb-81e0-951b7342fc57.png)
 - Completed a few tests with Attention GAN for text-to-image generation, which will be used to generated images for a certain portion of the tweets in our project. Explored the possibility of using it on RunwayML browser app and desktop app, also looking into the possibility of utilizing the original repo. Sample: 
 ![image](https://user-images.githubusercontent.com/44302577/117583873-34fbbf80-b13c-11eb-9872-198655491ed7.png)
 - Designed the logo for the project ("Barker") ![image](https://user-images.githubusercontent.com/44302577/117583620-bd796080-b13a-11eb-8560-000e26ba63e4.png)
