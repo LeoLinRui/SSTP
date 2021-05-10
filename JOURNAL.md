@@ -151,7 +151,8 @@ Data/ML stuff:
 - Aquired and processed dataset of CCTV videos.
 - Used YOLOv5 (You Only Look Once version 5) to create computer-vision-generated bounding boxes.
   - A message on both the ability of AI and the degree to which we are being watched.
-https://user-images.githubusercontent.com/64875104/117624577-e9401a80-b129-11eb-89ba-d6a82e26e86f.mp4
+  - https://user-images.githubusercontent.com/64875104/117624577-e9401a80-b129-11eb-89ba-d6a82e26e86f.mp4
+  - CS nerds think of the best names.
 
 
 
