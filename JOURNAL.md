@@ -1,4 +1,4 @@
-# Weekly Journal -- Project Barker
+# Weekly Journal -- [Project Barker](https://twitter-clone-sstp.appspot.com/)
 
 ## Previous Work
 In the past month, significant work has been put into the project. Although without the official approval of the committee, we’ve each been spending more than 20 hours per week to kickstart the project. Significant progress has been made, particularly in the computer science aspect of the project.
