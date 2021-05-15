@@ -171,5 +171,27 @@ May. 10 --> May. 17
 
 ### Summary
 #### Minh
+Twitter clone app:
+- Completed UI + backend for news-site
+  -   Integrated Leo's Dreamweaver design into site
+  -   It actually looks pretty good
+- Improved UI/UX for mobile users
+  -   Mobile users have a three-button top bar for the same functionality as desktop
+    -   Functionality of the buttons still needs to be implemented
+  -   Video player now *finally* scales properly
+    -   After much praying
+- Added option to not normalize text encodings in database loader
+  -   Enconding normalizer didn't always work well
+- Added 37k generic tweets (still AI-generated) to app
+  -   The experience feels much more realistic (and off-putting)
+  -   As expected, there is at least some profanity
+- Registered and partly set up Firebase service to host our own images
+  -   In progress. Not guaranteed to work.
+
+Data/ML stuff:
+- Trained two AI models to generate news articles
+  -   Model 1, LeftNews: trained on CNN, BuzzFeed, and Vox news articles
+  -   Model 2, RightNews: trained on Fox, Breitbart, and National Review articles
+  -   Should be the last models
 
 #### Leo
