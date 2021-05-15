@@ -128,7 +128,7 @@ Most of my time this week is spent on dealing with generic tweets. I had to baby
 After a few more attempts of fixing the StyleGan clone, I've given up. I got Colab Pro. I'm moving all the training data onto Google drive.
 
 ## Week 5
-May. 4 --> May. 11
+May. 3 --> May. 10
 
 ### Summary
 #### Minh
@@ -155,7 +155,6 @@ Data/ML stuff:
   -   CS nerds think of the best names.
 
 
-
 #### Leo
 - Set up the training environments and the pre-processing pipeline on Colab for training the Trump Images with StyleGAN Tensorflow. Completed ~60 hours of training and tweaking hyperparameters, achieving a satisfacoty result that can be used in production. Sample below: ![image](https://user-images.githubusercontent.com/44302577/117583609-a6d30980-b13a-11eb-81e0-951b7342fc57.png)
 - Completed a few tests with Attention GAN for text-to-image generation, which will be used to generated images for a certain portion of the tweets in our project. Explored the possibility of using it on RunwayML browser app and desktop app, also looking into the possibility of utilizing the original repo. Sample: 
@@ -165,3 +164,12 @@ Data/ML stuff:
 - Generated, with StyleGAN2 on FFHQ, 1000 faces for use as profile photos of the user of the tweet. Sample below:![image](https://user-images.githubusercontent.com/44302577/117583693-337dc780-b13b-11eb-939b-1f3afd3fb0b7.png)
 - An extensive meeting with Minh (3+ hours) to recap the status of all current products, determine the final layout and graphic design details of the site, disucuss the production setup of image databases, and decide the design requirements for the various news article "card" sections on the site, which I will be designing next week.
 - Downloaded and processed some more generic tweets data for final fine-tuning of the generic tweet model.
+
+
+## Week 6
+May. 10 --> May. 17
+
+### Summary
+#### Minh
+
+#### Leo
