@@ -195,3 +195,9 @@ Data/ML stuff:
   -   Should be the last models
 
 #### Leo
+- Designed a system to connect photos generated with BigGAN to a tweet in a way that makes sense. This ia based on an analysis of the generated tweets we currently have. Manually went through and looked for connections between the frequent keywords in the tweets and the categories and results of BigGAN's latent vectors.
+- After setting up the system and deciding on the strucutre, I generated photos in ~15 categories after setting up BigGAN on my PC. 
+- Generated the final versions of the Trump GAN.
+- Generated iamges from a Comic GAN in place of memes.
+- After generating all these images, I processed (resizing&compression for web use) them and organized then into the pre-determined structure.
+- Started on making a program to smartly associate images to tweets.
