@@ -201,3 +201,4 @@ Data/ML stuff:
 - Generated iamges from a Comic GAN in place of memes.
 - After generating all these images, I processed (resizing&compression for web use) them and organized then into the pre-determined structure.
 - Started on making a program to smartly associate images to tweets.
+- Wrote the script, made the video with Minh, and did the editing.
