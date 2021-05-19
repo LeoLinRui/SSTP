@@ -2,6 +2,7 @@
 \usepackage[letterpaper, portrait, margin=1.25in]{geometry}
 \usepackage[utf8]{inputenc}
 \usepackage[english]{babel}
+\usepackage{graphicx}
 
 
 \begin{document}
@@ -27,8 +28,37 @@
 
 \section{Process}
 
+\subsection{Leo Lin}
+
+\paragraph{}My work mainly focuses on working with the various AI Models to produce the various types of images that were needed for the project. I've gathered and processed data and studied new models. I've also experimented with building my own video-generation models.
+
+\paragraph{Image Generation}The part of my work that contributed to the final product the most is image generation. I've trained StyleGAN on multiple datasets I collected myself: emoji, Trump, Time covers, and Chinese characters. I've utilized pre-trained models such as BigGAN and AttnGAN to produce images for the final product. 
+
+\paragraph{Data Processing}Like mentioned above, I had to collect most of the data for training the desired models. The new skills I learned includes basic web crawling and font file processing. Through the process of writing code for processing Jason files, transform images, filter texts, etc. I greatly improved my coding skill (in terms of data/file processing) with these experience.
+
+\paragraph{Learning}Despite having experience with Deep Learning, I was relatively new to the realm of Natural Language Processing (NLP). So I spent many hours on teaching myself the concepts and structures SOTA NLP models (mostly Transformers). I read many papers including Transformers, BERT, ELmo, Big Bird (yes these models are actually called that, I didn't spend my SSTP watching Sesame Street), Longformer, Reformer, StyleGAN, CycleGAN, and many others to teach myself the new progresses in the field.
+
+\paragraph{Experiments}I've also spent a lot of time attempting to construct a video-generation model based on the reformer structure with a new token mechanism. I had to abandon this plan due to the lack of time but it was a very exciting opportunity to experiment with the things I've just learned. I did not really expect this to work (my paper would be in ICCV if it actually did, video-generation is a very cutting-edge topic that still lacks satisfactory results) but the knowledge and experience I gained was totally worth the time spent.
+
+\paragraph{Misc.}I've also gained some new experience with other rather minor things. I gained more experience with cloud computing (more time on MatPool and Google Colab, explored Kaggle, Runway ML) as most of my previous work were run on my personal node. In working with Minh, we tried to setup a remote forwarding server and an FTP server for better efficiency (an effort which Mr. Mandel also joined). I've learned how to use GitHub to manage code between multiple collaborators (all my previous use are for my own backup). I've also explored the field of video game design during the early stages of the project where we were trying to produce a film. This pursuit also sparked a conversation with Tim Oxton, a part-time photographer and video game developer.
+
+
+\subsection{Minh Nguyen}
+
+\section{Product Structure}
+
 \section{Conclusion}
 
 \paragraph{}In making the app and “creating” the content, we have improved our skills in data science, programming, and UX design. More importantly, however, we learned so much about ourselves. In reading the generated content, we explored our own thoughts and easily manipulated they are. In working on the project, we gained valuable experience with working in a team in a technical project as well as insight into what we do and do not want to do in our future careers.
+
+\section*{Appendix}
+
+\begin{figure}[h]
+	\begin{center}
+		\includegraphics[width=\linewidth]{imgs/000001075.jpeg}
+    		\caption[width=\linewidth]{image we have generated using Attention GAN}
+    		\label{AttnGAN}
+	\end{center}
+\end{figure} 
 
 \end{document}
