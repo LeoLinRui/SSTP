@@ -3,6 +3,7 @@ import os
 import re
 import bz2
 import csv
+import pandas as pd
 
 from langdetect import detect
 from p_tqdm import p_map
@@ -10,8 +11,9 @@ from p_tqdm import p_map
 
 ENGLISH_ONLY = True
 NO_RT = True
-LEN_LIMIT = None  # This is a lower limit
+LEN_LIMIT = 100  # This is a lower limit
 REMOVE_EMOJI = True
+UNFINISHED_LIMIT = True
 
 
 def checkEng(text:str):
@@ -31,6 +33,13 @@ def checkRT(text:str):
 def checkLen(text:str):
     if LEN_LIMIT is not None:
         return len(text) >= LEN_LIMIT
+    else:
+        return True
+
+
+def checkLUnfinished(text:str):
+    if UNFINISHED_LIMIT:
+        return not text.endswith("…") and "… http" not in text
     else:
         return True
 
@@ -64,26 +73,28 @@ def removeEmojis(data):
 def process(filedir:str):
     # print("processing", filedir)
     content = []
+    
+    if filedir.endswith(".bz2"):
 
-    with bz2.open(filedir) as f:
+        with bz2.open(filedir) as f:
 
-        for line in f:
-            tweet = json.loads(line)
-            try:
-                tweet = tweet["text"]
-
+            for line in f:
+                tweet = json.loads(line)
                 try:
-                    if checkLen(tweet) and checkRT(tweet) and checkEng(tweet):
-                        if REMOVE_EMOJI:
-                            tweet = removeEmojis(tweet)
+                    tweet = tweet["text"]
 
-                        content.append(tweet)
-                except: # handle No language feature error
-                    pass
-                
-            except KeyError:
-                pass     
-    return content
+                    try:
+                        if checkLen(tweet) and checkRT(tweet) and checkLUnfinished(tweet) and checkEng(tweet):
+                            if REMOVE_EMOJI:
+                                tweet = removeEmojis(tweet)
+
+                            content.append(tweet)
+                    except: # handle No language feature error
+                        pass
+                    
+                except KeyError:
+                    pass     
+        return content
 
 
 if __name__ == '__main__':
@@ -101,7 +112,7 @@ if __name__ == '__main__':
     print(len(dir_list), "files found")
 
 
-    tweet_list = p_map(process, dir_list)
+    tweet_list = p_map(process, dir_list, num_cpus=16)
     tweet_list = sum(tweet_list, [])
     
 
@@ -109,7 +120,13 @@ if __name__ == '__main__':
     for tweet in tweet_list[:5]:
         print(tweet)
 
- 
+    
+    '''
     with open(os.path.join(save_dir, str(len(tweet_list)) + "tweets.csv"), 'w', encoding='utf-8') as f:
-        writer = csv.writer(f, delimiter=',')
-        writer.writerow(tweet_list)
+        writer = csv.writer(f, delimiter="=")
+        for tweet in tweet_list:
+            writer.writerow([tweet])
+    '''
+
+    df = pd.DataFrame(tweet_list, columns=['tweet'])
+    df.to_csv(os.path.join(save_dir, str(len(tweet_list)) + "tweets.csv"), index=False)
